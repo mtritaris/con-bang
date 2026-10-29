@@ -8,7 +8,8 @@ sky leviathan, the five whale falls (Kình Lạc) that reversed Earth's five mas
 Super Beasts (Thất Thú), the purple crystal seals, and the citadel on his back. Vietnamese and English
 only (JA/FR/DE were considered and dropped by Mark on 2026-10-29).
 
-Live artifact (private, Mark's account): https://claude.ai/artifact/HgYvpJBCB2VCNsYuB8NHuf
+Live site (GitHub Pages, public): https://mtritaris.github.io/con-bang/ — repo https://github.com/mtritaris/con-bang (master, serves /docs)
+Claude artifact (private, Mark's account): https://claude.ai/artifact/HgYvpJBCB2VCNsYuB8NHuf
 
 ## Files
 - `index.html` — the whole page (CSS, markup, content data, behaviour). Authored for the Claude
@@ -19,7 +20,7 @@ Live artifact (private, Mark's account): https://claude.ai/artifact/HgYvpJBCB2VC
 - `docs/index.html` — generated; do not edit by hand. Served by GitHub Pages (legacy mode only allows `/` or `/docs`).
 - `STATUS.md` — this file.
 
-Not yet a git repo of its own (the parent `~` is a git repo). `git init` here if we want GitHub Pages.
+Own git repo since 2026-10-29, pushed to GitHub; Pages deploys from master:/docs automatically on push.
 
 ## Page structure (ids used by nav)
 `#top` hero · `#story` original text + key terms · `#chronicle` five extinctions timeline ·
@@ -44,7 +45,7 @@ edit `D.ui.en`.
 - Real-world figures (dates, % species lost, whale-fall stage durations) are rounded and labelled
   estimates.
 
-## Delivering to the friend's iPhone (open question as of 2026-10-29)
+## Delivering to the friend's iPhone (resolved 2026-10-29: GitHub Pages, option 2)
 Options, in order of ease:
 1. Share the artifact from its Share menu, text the link; Safari → Share → Add to Home Screen.
 2. Host `docs/index.html` (GitHub Pages / Netlify / Cloudflare Pages), then Add to Home Screen.
