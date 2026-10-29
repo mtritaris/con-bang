@@ -1,0 +1,864 @@
+<title>Côn Bằng: Kình Ngư Cuối Cùng</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+JP:wght@400;600&display=swap">
+<style>
+/* Layout: a single long descent. Fixed starfield behind; the whale hero sits at the top like a sky;
+   each chapter is a band in the descent toward the whale fall, ending on the vow. Dark-first by design
+   (twilight sky world); every colour is explicit so the page is correct on any host background. */
+:root{
+  --abyss:#06091a;        /* page ground */
+  --deep:#0c1230;         /* band ground */
+  --deep-2:#131a3f;       /* raised surface */
+  --line:rgba(190,170,255,.14);
+  --ivory:#ece5d3;        /* body text */
+  --ivory-dim:#a9a393;    /* secondary text */
+  --crystal:#a855f7;      /* seals */
+  --crystal-soft:#c9a2ff;
+  --lantern:#f2b84b;      /* castle light */
+  --bloom:#5fd39a;        /* kình lạc life */
+  --whale:#243160;        /* whale body */
+  --whale-edge:#5c6fb0;
+  --danger:#e4654f;
+  --display:"Cormorant Garamond","Noto Serif JP",Georgia,"Times New Roman",serif;
+  --body:"Be Vietnam Pro","Noto Serif JP","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --gutter-l:max(16px,env(safe-area-inset-left,0px));
+  --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--abyss);color:var(--ivory);font-family:var(--body);font-weight:300;line-height:1.65;font-size:17px;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--abyss)}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.page{position:relative;z-index:1}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,5vw,3.6rem);letter-spacing:.005em}
+h3{font-size:clamp(1.35rem,2.6vw,1.9rem)}
+p{margin:0 0 1em;max-width:66ch}
+a{color:var(--crystal-soft)}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--lantern);outline-offset:3px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--crystal-soft);display:flex;align-items:center;gap:.8rem;margin-bottom:1.1rem}
+.eyebrow::before{content:"";width:2.2rem;height:1px;background:var(--crystal);opacity:.7}
+.lead{font-family:var(--display);font-size:clamp(1.25rem,2.2vw,1.6rem);font-weight:400;line-height:1.4;color:var(--ivory)}
+.muted{color:var(--ivory-dim)}
+em{font-style:italic}
+.tag{display:inline-block;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.25em .6em;border:1px solid var(--line);border-radius:2px;color:var(--ivory-dim);vertical-align:middle}
+.tag.canon{color:var(--lantern);border-color:rgba(242,184,75,.45)}
+.tag.ext{color:var(--bloom);border-color:rgba(95,211,154,.45)}
+.tag.open{color:var(--crystal-soft);border-color:rgba(168,85,247,.5)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;gap:1rem;padding-block:.6rem;padding-left:var(--gutter-l);padding-right:var(--gutter-r);background:rgba(6,9,26,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .brand{font-family:var(--display);font-weight:700;font-size:1.25rem;letter-spacing:.02em;text-decoration:none;color:var(--ivory);white-space:nowrap}
+.nav .brand span{color:var(--crystal-soft);font-weight:400;font-style:italic}
+.nav .links{display:flex;gap:1.1rem;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav .links::-webkit-scrollbar{display:none}
+.nav .links a{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory-dim);text-decoration:none;white-space:nowrap;padding:.4em 0}
+.nav .links a:hover{color:var(--ivory)}
+.lang{display:flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;flex:none}
+.lang button{background:transparent;border:0;padding:.35em .55em;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--ivory-dim)}
+.lang button+button{border-left:1px solid var(--line)}
+.lang button[aria-pressed="true"]{background:rgba(168,85,247,.22);color:#fff}
+.audio{flex:none;display:flex;align-items:center;gap:.5em;background:transparent;border:1px solid var(--line);border-radius:3px;padding:.35em .7em;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--ivory-dim)}
+.audio[aria-pressed="true"]{color:var(--lantern);border-color:rgba(242,184,75,.5)}
+.audio .bars{display:inline-flex;gap:2px;align-items:flex-end;height:10px}
+.audio .bars i{display:block;width:2px;height:3px;background:currentColor}
+.audio[aria-pressed="true"] .bars i{animation:bar 1.2s ease-in-out infinite}
+.audio .bars i:nth-child(2){animation-delay:.2s}.audio .bars i:nth-child(3){animation-delay:.4s}
+@keyframes bar{0%,100%{height:3px}50%{height:10px}}
+@media (max-width:760px){.nav .links{display:none}}
+
+/* hero */
+.hero{position:relative;padding-left:var(--gutter-l);padding-right:var(--gutter-r);padding-block:2.5rem 3rem;overflow:hidden}
+.hero-inner{max-width:1240px;margin:0 auto;display:grid;gap:1.5rem}
+.hero-title{display:grid;gap:.6rem;max-width:40rem}
+.hero-title .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--crystal-soft)}
+.hero-title h1{font-size:clamp(3.2rem,9vw,7.5rem);font-weight:700;line-height:.95;letter-spacing:-.01em}
+.hero-title h1 small{display:block;font-size:.3em;font-weight:400;font-style:italic;letter-spacing:.02em;color:var(--ivory-dim);margin-top:.5rem;line-height:1.25}
+.hero-stage{position:relative;width:100%;max-width:100%;aspect-ratio:1400/620}
+.hero-stage svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hero-meta{display:flex;flex-wrap:wrap;gap:1.2rem 2.5rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivory-dim)}
+.hero-meta b{display:block;font-family:var(--display);font-size:1.5rem;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ivory);margin-top:.15rem}
+.hero-meta b.gold{color:var(--lantern)}.hero-meta b.violet{color:var(--crystal-soft)}.hero-meta b.green{color:var(--bloom)}
+.whale-body{fill:var(--whale);stroke:var(--whale-edge);stroke-width:1.5}
+.whale-line{fill:none;stroke:var(--whale-edge);stroke-width:1;opacity:.55}
+.castle{fill:#1b1526;stroke:#4a3b5e;stroke-width:1}
+.window{fill:var(--lantern);opacity:.9}
+.window.flicker{animation:flick 3.4s ease-in-out infinite}
+.window.flicker:nth-of-type(odd){animation-duration:2.7s;animation-delay:.6s}
+@keyframes flick{0%,100%{opacity:.95}50%{opacity:.55}}
+.crystal{fill:var(--crystal);stroke:#f3e8ff;stroke-width:.8;filter:url(#glow)}
+.aura{fill:none;stroke:var(--bloom);stroke-opacity:.25;stroke-width:14;filter:url(#soft)}
+.float{animation:float 9s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@media (prefers-reduced-motion:reduce){.float,.window.flicker,.audio .bars i{animation:none}}
+.scrollcue{display:flex;justify-content:center;margin-top:1rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory-dim)}
+
+/* bands */
+.band{padding-left:var(--gutter-l);padding-right:var(--gutter-r);padding-block:clamp(4rem,9vw,8rem);border-top:1px solid var(--line);position:relative}
+.band.deep{background:linear-gradient(180deg,rgba(12,18,48,.0),rgba(12,18,48,.85) 20%,rgba(12,18,48,.85) 80%,rgba(12,18,48,0))}
+.wrap{max-width:1180px;margin:0 auto;min-width:0}
+.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,5vw,5rem);align-items:start}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+.reveal{opacity:1;transform:none;transition:opacity .9s ease,transform .9s ease}
+.js .reveal.pending{opacity:0;transform:translateY(22px)}
+@media (prefers-reduced-motion:reduce){.js .reveal.pending{opacity:1;transform:none}}
+
+/* story */
+.story-card{background:var(--deep-2);border:1px solid var(--line);border-radius:4px;padding:clamp(1.3rem,3vw,2.2rem);position:relative}
+.story-card::before{content:"";position:absolute;inset:0;border-radius:4px;background:radial-gradient(60% 40% at 100% 0%,rgba(168,85,247,.16),transparent 70%);pointer-events:none}
+.story-card .orig{font-family:var(--display);font-size:1.12rem;line-height:1.6;color:var(--ivory);white-space:pre-line;max-height:22rem;overflow:hidden;position:relative;transition:max-height .5s ease}
+.story-card .orig::after{content:"";position:absolute;inset:auto 0 0 0;height:7rem;background:linear-gradient(180deg,transparent,var(--deep-2))}
+.story-card.open .orig{max-height:200rem}
+.story-card.open .orig::after{opacity:0}
+.story-card .more{margin-top:1rem;background:transparent;border:1px solid var(--crystal);color:var(--crystal-soft);border-radius:3px;padding:.5em 1em;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+.keyterms{display:grid;gap:1rem;margin-top:2rem}
+.keyterm{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:baseline;border-top:1px solid var(--line);padding-top:.9rem}
+.keyterm dt{font-family:var(--display);font-size:1.35rem;font-weight:600;color:var(--lantern);white-space:nowrap}
+.keyterm dd{margin:0;color:var(--ivory-dim)}
+.keyterm dd b{color:var(--ivory);font-weight:500}
+
+/* timeline */
+.timeline{position:relative;display:grid;gap:clamp(2rem,4vw,3.5rem);margin-top:3rem}
+.timeline::before{content:"";position:absolute;left:calc(1.5rem - 1px);top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--crystal),var(--bloom));opacity:.5}
+.epoch{display:grid;grid-template-columns:3rem minmax(0,1fr);gap:1.2rem;align-items:start}
+.epoch .node{width:3rem;height:3rem;border-radius:50%;background:var(--abyss);border:2px solid var(--crystal);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--ivory);position:relative;z-index:1}
+.epoch .body{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:1.5rem;background:var(--deep-2);border:1px solid var(--line);border-radius:4px;padding:1.3rem 1.5rem;min-width:0}
+@media (max-width:760px){.epoch .body{grid-template-columns:1fr}}
+.epoch h3{color:var(--ivory)}
+.epoch .when{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--crystal-soft);margin:.3rem 0 .9rem}
+.epoch .loss{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ivory-dim)}
+.epoch .loss b{display:block;font-family:var(--display);font-size:1.6rem;color:var(--danger);font-weight:600;letter-spacing:0;text-transform:none;font-variant-numeric:tabular-nums}
+.epoch .loss b.g{color:var(--bloom)}
+.fall{width:100%;max-width:100%;aspect-ratio:300/220;border-radius:3px;background:linear-gradient(180deg,#0f1838 0%,#070b1c 100%);overflow:hidden}
+.fall svg{width:100%;height:100%;display:block}
+.fall .w{fill:var(--whale);stroke:var(--whale-edge);stroke-width:.8}
+.fall .seed{fill:var(--bloom);opacity:.9}
+.fall .stem{stroke:var(--bloom);stroke-width:1.2;fill:none;opacity:.7}
+.fall .live .w{animation:sink 7s ease-in-out infinite}
+.fall .live .seed{animation:bloomup 7s ease-in-out infinite}
+.fall .live .stem{animation:grow 7s ease-in-out infinite}
+@keyframes sink{0%{transform:translateY(-80px) scale(.95);opacity:.95}45%{transform:translateY(0) scale(1);opacity:.85}70%{opacity:.25}100%{opacity:0;transform:translateY(0)}}
+@keyframes bloomup{0%,45%{opacity:0;transform:scale(0)}75%{opacity:1;transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+@keyframes grow{0%,45%{stroke-dashoffset:120;opacity:0}60%{opacity:.7}100%{stroke-dashoffset:0;opacity:.7}}
+@media (prefers-reduced-motion:reduce){.fall .live .w,.fall .live .seed,.fall .live .stem{animation:none}}
+.legacy{margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.legacy .stat{border-top:1px solid var(--line);padding-top:.9rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivory-dim)}
+.legacy .stat b{display:block;font-family:var(--display);font-size:2.2rem;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ivory);font-variant-numeric:tabular-nums;margin:.2rem 0 .3rem}
+.legacy .stat small{display:block;font-family:var(--body);font-size:.85rem;letter-spacing:0;text-transform:none;color:var(--ivory-dim)}
+
+/* whale fall */
+.wf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5rem;align-items:start;margin-top:2.5rem}
+@media (max-width:860px){.wf{grid-template-columns:1fr}}
+.depth{position:relative;background:linear-gradient(180deg,#152048 0%,#0b1230 45%,#05081a 100%);border:1px solid var(--line);border-radius:4px;overflow:hidden;min-height:30rem}
+.depth svg{width:100%;height:100%;display:block}
+.stages{display:grid;gap:0}
+.stage{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.2rem;padding:1.3rem 0;border-top:1px solid var(--line);cursor:pointer}
+.stage:last-child{border-bottom:1px solid var(--line)}
+.stage .n{font-family:var(--mono);font-size:.7rem;color:var(--crystal-soft);letter-spacing:.1em;padding-top:.4rem}
+.stage h4{font-family:var(--display);font-size:1.35rem;font-weight:600;color:var(--ivory)}
+.stage h4 span{display:block;font-size:.8rem;font-family:var(--mono);font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--ivory-dim);margin-top:.25rem}
+.stage p{margin:.6rem 0 0;color:var(--ivory-dim);font-size:.95rem}
+.stage p b{color:var(--bloom);font-weight:500}
+.stage.active{background:linear-gradient(90deg,rgba(95,211,154,.08),transparent)}
+.stage.active h4{color:var(--bloom)}
+
+/* beasts */
+.beasts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-top:2.5rem}
+.beast{aspect-ratio:3/4;max-width:100%;border:1px solid var(--line);border-radius:4px;background:var(--deep-2);display:grid;grid-template-rows:1fr auto;padding:1rem;position:relative;overflow:hidden}
+.beast .sil{display:grid;place-items:center}
+.beast .sil svg{width:70%;height:auto;max-width:100%;filter:blur(3px);opacity:.45}
+.beast.revealed .sil svg{filter:none;opacity:1}
+.beast .nm{font-family:var(--display);font-size:1.2rem;font-weight:600;color:var(--ivory);text-wrap:balance}
+.beast .nm small{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ivory-dim);margin-top:.25rem;font-weight:400}
+.beast.locked .nm{color:var(--ivory-dim)}
+.beast.revealed{border-color:rgba(242,184,75,.5);background:linear-gradient(180deg,rgba(242,184,75,.08),var(--deep-2))}
+.meters{display:grid;gap:1.3rem;margin-top:2.5rem;max-width:44rem}
+.meter{display:grid;gap:.45rem}
+.meter .lbl{display:flex;justify-content:space-between;gap:1rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory-dim)}
+.meter .lbl b{color:var(--ivory);font-weight:500}
+.meter .bar{height:10px;border-radius:2px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.meter .bar i{position:absolute;inset:0 auto 0 0;width:var(--v);background:var(--c,var(--crystal));border-radius:2px;transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+.js .pending .meter .bar i{width:0}
+.meter .note{font-size:.88rem;color:var(--ivory-dim)}
+
+/* seals */
+.seals{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5rem;align-items:center;margin-top:2.5rem}
+@media (max-width:860px){.seals{grid-template-columns:1fr}}
+.ring{width:100%;max-width:520px;aspect-ratio:1;margin:0 auto;position:relative}
+.ring svg{width:100%;height:100%;display:block;overflow:visible}
+.ring .orbit{fill:none;stroke:var(--line);stroke-dasharray:3 6}
+.ring .heart{fill:var(--whale);stroke:var(--whale-edge);stroke-width:1.5}
+.ring .pulse{fill:none;stroke:var(--bloom);stroke-opacity:.5;stroke-width:2;transform-origin:center;animation:pulse 4s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.55);opacity:.8}100%{transform:scale(1.15);opacity:0}}
+@media (prefers-reduced-motion:reduce){.ring .pulse{animation:none;opacity:.3}}
+.ring .seal{cursor:pointer}
+.ring .seal polygon{fill:var(--crystal);stroke:#f3e8ff;stroke-width:1;filter:url(#glow2);transition:transform .3s ease;transform-box:fill-box;transform-origin:center}
+.ring .seal:hover polygon,.ring .seal[aria-pressed="true"] polygon{transform:scale(1.25);fill:var(--crystal-soft)}
+.ring .seal text{font-family:var(--mono);font-size:10px;fill:var(--ivory-dim);text-anchor:middle;letter-spacing:.1em;pointer-events:none}
+.ring .seal[aria-pressed="true"] text{fill:var(--ivory)}
+.sealinfo{background:var(--deep-2);border:1px solid var(--line);border-radius:4px;padding:1.6rem;min-height:16rem}
+.sealinfo .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--crystal-soft)}
+.sealinfo h3{margin:.4rem 0 .8rem;color:var(--ivory)}
+.sealinfo p{color:var(--ivory-dim);margin-bottom:.6em}
+.sealinfo .stab{margin-top:1rem;display:flex;gap:.6rem;align-items:center;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivory-dim)}
+.sealinfo .stab .bar{flex:1;height:6px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+.sealinfo .stab .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--crystal),var(--crystal-soft));width:var(--v)}
+.sealinfo .stab b{color:var(--ivory);font-variant-numeric:tabular-nums}
+
+/* citadel */
+.citadel{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:2.5rem;align-items:start;margin-top:2.5rem}
+@media (max-width:860px){.citadel{grid-template-columns:1fr}}
+.cross{background:linear-gradient(180deg,#0e1434,#09102a);border:1px solid var(--line);border-radius:4px;padding:1rem;overflow:hidden}
+.cross svg{width:100%;height:auto;display:block;overflow:visible}
+.cross .stone{fill:#1b1a2e;stroke:#4a4566;stroke-width:1}
+.cross .stone2{fill:#241f38;stroke:#55496e;stroke-width:1}
+.cross .deck{fill:var(--whale);stroke:var(--whale-edge)}
+.cross .hot{cursor:pointer}
+.cross .hot circle{fill:var(--lantern);stroke:rgba(242,184,75,.4);stroke-width:8;transition:stroke-width .3s}
+.cross .hot:hover circle,.cross .hot[aria-pressed="true"] circle{stroke-width:14}
+.cross .hot text{font-family:var(--mono);font-size:11px;fill:var(--ivory);pointer-events:none}
+.rooms{display:grid;gap:.6rem}
+.room{text-align:left;background:transparent;border:1px solid var(--line);border-radius:4px;padding:1rem 1.1rem;display:grid;gap:.3rem;transition:border-color .2s,background .2s}
+.room:hover{border-color:rgba(242,184,75,.45)}
+.room[aria-pressed="true"]{background:rgba(242,184,75,.08);border-color:rgba(242,184,75,.6)}
+.room .rn{font-family:var(--display);font-size:1.25rem;font-weight:600;color:var(--ivory);display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
+.room .rd{font-size:.92rem;color:var(--ivory-dim);margin:0}
+.room[aria-pressed="true"] .rd{color:var(--ivory)}
+
+/* vow */
+.vow{text-align:center;background:radial-gradient(70% 60% at 50% 40%,rgba(168,85,247,.18),transparent 70%)}
+.vow .wrap{max-width:52rem}
+.vow blockquote{margin:2rem auto 0;font-family:var(--display);font-size:clamp(1.45rem,3vw,2.3rem);font-weight:400;line-height:1.35;color:var(--ivory);text-wrap:balance}
+.vow blockquote em{color:var(--crystal-soft)}
+.vow .legend{margin:2.5rem auto 0;color:var(--ivory-dim);text-align:left;max-width:60ch}
+.vow .sigil{margin:3rem auto 0;width:120px;max-width:100%}
+
+/* bible */
+.bible{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem;margin-top:2.5rem}
+@media (max-width:860px){.bible{grid-template-columns:1fr}}
+.bible ul{list-style:none;margin:0;padding:0;display:grid;gap:.8rem}
+.bible li{border-top:1px solid var(--line);padding-top:.8rem;color:var(--ivory-dim);font-size:.95rem}
+.bible li b{color:var(--ivory);font-weight:500}
+.bible li q{font-family:var(--display);font-style:italic;color:var(--ivory)}
+.bible h3{margin-bottom:1rem;display:flex;gap:.7rem;align-items:center}
+
+footer{padding-left:var(--gutter-l);padding-right:var(--gutter-r);padding-block:3rem 4rem;border-top:1px solid var(--line);font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivory-dim)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2.5rem;justify-content:space-between}
+</style>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<nav class="nav" aria-label="Chương">
+  <a class="brand" href="#top">Côn Bằng <span data-i="brand_sub">· Kình Lạc</span></a>
+  <div class="links">
+    <a href="#story" data-i="nav_story">Cốt truyện</a>
+    <a href="#chronicle" data-i="nav_chron">Biên niên sử</a>
+    <a href="#whalefall" data-i="nav_wf">Kình Lạc</a>
+    <a href="#beasts" data-i="nav_beasts">Thất Thú</a>
+    <a href="#seals" data-i="nav_seals">Phong ấn</a>
+    <a href="#citadel" data-i="nav_citadel">Lâu đài</a>
+    <a href="#vow" data-i="nav_vow">Lời thề</a>
+    <a href="#bible" data-i="nav_bible">Sổ tay</a>
+  </div>
+  <div class="lang" role="group" aria-label="Ngôn ngữ / Language">
+    <button type="button" data-lang="vi" aria-pressed="true">VI</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+  <button type="button" class="audio" id="audioBtn" aria-pressed="false" title="Ambient: whale song, wind, chimes">
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-i="audio_off">Âm thanh</span>
+  </button>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-title">
+      <div class="kicker" data-i="hero_kicker">Siêu thú thứ nhất trong Thất Thú · Lâu đài trên lưng</div>
+      <h1>Côn Bằng<small data-i="hero_sub">Kình ngư cuối cùng, và toà lâu đài nhân loại dựng trên lưng người để giữ người ở lại.</small></h1>
+    </div>
+    <div class="hero-stage" aria-label="Côn Bằng bay giữa sao, lâu đài trên lưng, phong ấn pha lê tím quay quanh">
+      <svg viewBox="0 0 1400 620" id="heroSvg">
+        <defs>
+          <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="soft" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
+          <filter id="lantern" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="6"/></filter>
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34457e"/><stop offset=".6" stop-color="#1e2a55"/><stop offset="1" stop-color="#121a3a"/></linearGradient>
+          <radialGradient id="moon" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff6dc" stop-opacity=".9"/><stop offset=".5" stop-color="#f2b84b" stop-opacity=".18"/><stop offset="1" stop-color="#f2b84b" stop-opacity="0"/></radialGradient>
+        </defs>
+        <circle cx="1180" cy="120" r="160" fill="url(#moon)"/>
+        <g id="orbitBack"></g>
+        <g class="float">
+          <!-- life aura trailing beneath -->
+          <path class="aura" d="M 200 420 C 500 470, 900 470, 1250 420"/>
+          <g id="whale">
+            <path class="whale-body" style="fill:url(#bodyGrad)" d="M 150 300 C 170 220, 300 170, 520 165 C 700 160, 900 190, 1040 250 C 1070 262, 1090 268, 1110 270 C 1150 230, 1230 170, 1330 150 C 1300 220, 1260 260, 1230 285 C 1270 320, 1310 380, 1340 440 C 1250 420, 1170 360, 1110 320 C 1060 330, 1000 345, 900 360 C 700 392, 400 392, 230 352 C 190 342, 160 320, 150 300 Z"/>
+            <path class="whale-line" d="M 150 300 C 300 328, 520 342, 760 348"/>
+            <path class="whale-line" d="M 240 332 C 300 352, 380 362, 470 366"/>
+            <path class="whale-line" d="M 250 345 C 310 364, 390 374, 470 378"/>
+            <path class="whale-line" d="M 262 357 C 320 376, 400 384, 470 388"/>
+            <!-- pectoral fin -->
+            <path class="whale-body" d="M 430 352 C 455 405, 530 445, 620 432 C 555 414, 495 380, 470 345 Z"/>
+            <!-- eye -->
+            <circle cx="320" cy="268" r="8" fill="#0a0d1f"/>
+            <circle cx="320" cy="268" r="4.5" fill="#f2b84b"/>
+            <circle cx="320" cy="268" r="10" fill="#f2b84b" opacity=".25" filter="url(#lantern)"/>
+            <!-- old battle scar -->
+            <path class="whale-line" style="stroke:#8a6a9c;opacity:.7" d="M 920 215 l 26 44 M 936 206 l 24 50"/>
+          </g>
+          <!-- citadel on the back -->
+          <g id="citadel">
+            <path class="castle" d="M 540 178 L 540 166 L 880 190 L 880 202 C 760 198, 650 190, 540 178 Z"/>
+            <!-- keep -->
+            <rect class="castle" x="660" y="100" width="70" height="78"/>
+            <path class="castle" d="M 655 100 L 695 52 L 735 100 Z"/>
+            <rect class="castle" x="664" y="92" width="8" height="10"/><rect class="castle" x="684" y="92" width="8" height="10"/><rect class="castle" x="704" y="92" width="8" height="10"/><rect class="castle" x="722" y="92" width="8" height="10"/>
+            <!-- towers -->
+            <rect class="castle" x="590" y="128" width="34" height="48"/><path class="castle" d="M 586 128 L 607 96 L 628 128 Z"/>
+            <rect class="castle" x="760" y="134" width="30" height="50"/><path class="castle" d="M 756 134 L 775 104 L 794 134 Z"/>
+            <rect class="castle" x="820" y="150" width="26" height="44"/><path class="castle" d="M 816 150 L 833 124 L 850 150 Z"/>
+            <rect class="castle" x="548" y="146" width="24" height="32"/><path class="castle" d="M 544 146 L 560 122 L 576 146 Z"/>
+            <!-- curtain walls -->
+            <rect class="castle" x="624" y="150" width="36" height="28"/><rect class="castle" x="730" y="150" width="30" height="30"/><rect class="castle" x="790" y="160" width="30" height="28"/>
+            <!-- observatory lens -->
+            <circle cx="695" cy="70" r="5" fill="#a855f7" filter="url(#glow)"/>
+            <!-- windows -->
+            <rect class="window flicker" x="676" y="118" width="6" height="9"/><rect class="window flicker" x="694" y="118" width="6" height="9"/><rect class="window flicker" x="712" y="118" width="6" height="9"/>
+            <rect class="window flicker" x="676" y="140" width="6" height="9"/><rect class="window flicker" x="694" y="140" width="6" height="9"/><rect class="window flicker" x="712" y="140" width="6" height="9"/>
+            <rect class="window flicker" x="604" y="140" width="5" height="8"/><rect class="window flicker" x="604" y="158" width="5" height="8"/>
+            <rect class="window flicker" x="772" y="148" width="5" height="8"/><rect class="window flicker" x="772" y="166" width="5" height="8"/>
+            <rect class="window flicker" x="830" y="164" width="5" height="8"/><rect class="window flicker" x="557" y="158" width="5" height="8"/>
+            <rect class="window flicker" x="638" y="160" width="5" height="8"/><rect class="window flicker" x="742" y="162" width="5" height="8"/><rect class="window flicker" x="802" y="170" width="5" height="8"/>
+            <!-- lantern halo -->
+            <ellipse cx="700" cy="150" rx="150" ry="60" fill="#f2b84b" opacity=".08" filter="url(#soft)"/>
+            <!-- banners -->
+            <path d="M 607 96 l 0 -22 l 16 6 l -16 6" fill="#a855f7" opacity=".9"/>
+            <path d="M 775 104 l 0 -20 l 14 5 l -14 5" fill="#a855f7" opacity=".9"/>
+          </g>
+        </g>
+        <g id="orbitFront"></g>
+      </svg>
+    </div>
+    <div class="hero-meta">
+      <div><span data-i="m1_l">Dòng dõi</span><b data-i="m1_v">5 Côn Bằng mẹ · 1 con đực cuối</b></div>
+      <div><span data-i="m2_l">Sức mạnh trong Thất Thú</span><b class="violet" data-i="m2_v">Yếu nhất</b></div>
+      <div><span data-i="m3_l">Phước lành ban xuống</span><b class="green" data-i="m3_v">Hơn sáu siêu thú còn lại cộng lại</b></div>
+      <div><span data-i="m4_l">Trạng thái Kình Lạc</span><b class="gold" data-i="m4_v">Bị phong ấn · Tạm hoãn</b></div>
+    </div>
+    <div class="scrollcue" data-i="scroll">↓ Cuộn xuống để lặn theo dòng dõi</div>
+  </div>
+</header>
+<section class="band" id="story">
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="eyebrow" data-i="story_eyebrow">Chương I · Cốt truyện</div>
+      <h2 data-i="story_h">Mọi đặc quyền của thời thái bình đều là công trạng của Côn Bằng</h2>
+      <p class="lead" data-i="story_lead" style="margin-top:1.4rem">Thực vật, động vật, đất đai, sự sinh trưởng. Không gì trong số đó là hiển nhiên. Tất cả đều được mua bằng năm lần Kình Lạc.</p>
+      <dl class="keyterms">
+        <div class="keyterm"><dt>Côn Bằng</dt><dd data-i="kt1"><b>Kình ngư khổng lồ bay trên trời.</b> Không phải một cá thể mà là một nhóm loài. Luôn có một Côn Bằng mẹ, có khả năng tăng trao đổi chất của muôn loài và hồi phục những khu rừng chúng bay qua.</dd></div>
+        <div class="keyterm"><dt>Kình Lạc</dt><dd data-i="kt2"><b>Sự hi sinh của Côn Bằng mẹ.</b> Mượn hiện tượng “whale fall” ngoài đời thực: xác một con cá voi chìm xuống nuôi sống cả một hệ sinh thái suốt hàng chục năm. Ở đây, nó phục sinh cả hành tinh.</dd></div>
+        <div class="keyterm"><dt data-i="kt3_t">Phong ấn</dt><dd data-i="kt3"><b>Pha lê tím bay quanh Côn Bằng.</b> Do nhân loại tạo ra để chặn quá trình Kình Lạc của cá thể đực cuối cùng. Nếu nó Kình Lạc, giống loài kết thúc.</dd></div>
+        <div class="keyterm"><dt data-i="kt4_t">Lâu đài</dt><dd data-i="kt4"><b>Trên lưng Côn Bằng.</b> Bằng chứng duy nhất về sự hợp tác giữa nhân loại và một siêu thú. Một lời thề không khế ước.</dd></div>
+      </dl>
+    </div>
+    <div class="reveal">
+      <div class="story-card" id="storyCard">
+        <span class="tag canon" data-i="orig_tag">Nguyên bản · Canon</span>
+        <div class="orig" id="origText">Thực vật, động vật, đất đai, sự sinh trưởng... tất cả những đặc quyền mà chúng ta đang được hưởng trong thời kì thái bình này tất cả đều chính là những công trạng lớn lao của Côn Bằng (một loài Kình ngư khổng lồ).
+
+Trong suốt bề dày lịch sử Côn Bằng không chỉ có một con, đây dường như là một nhóm loài, sẽ luôn có một cá thể Côn Bằng mẹ với khả năng tăng khả năng trao đổi chất của các loài vật, hồi phục sinh trạng của các khu rừng mà chúng bay qua và sau mỗi một đợt đại diệt chủng như đợt tuyệt chủng kỷ Ordovic-Silur, kỷ Devon, kỷ Permi-Kỷ Trias, kỷ Jura và Kỷ Phấn trắng, sau mỗi lần như vậy Côn Bằng mẹ sẽ hi sinh bản thân mình tạo thành quá trình Kình Lạc, từ đó phục sinh lại sự sống và các giá trị sinh học cho thế giới và một lần nữa cứu sống hành tinh này.
+
+Mỗi lần như vậy Côn Bằng mẹ sẽ đều để lại một cá thể Côn Bằng con và chúng sẽ tiếp tục hành trình và sứ mệnh giống các cá thể Côn Bằng tiền nhiệm. Đặc biệt, cá thể Côn Bằng cuối cùng được sinh ra lại là giống đực. Tuy kích thước cũng như những phước lành mà cá thể đực này mang lại là vượt trội so với các cá thể cái, nhưng khi Côn Bằng đực thực hiện quá trình Kình Lạc thì sẽ là dấu chấm hết cho giống loài này.
+
+Vậy nên sau trận chiến tàn khốc (một điều gì đó sau này sẽ được tiết lộ dần khi 7 siêu thú xuất hiện), khi Côn Bằng định hi sinh bản thân để quá trình Kình Lạc xảy ra, nhân loại đã ngăn chặn quá trình đó bằng các phong ấn pha lê tím bay xung quanh con kình ngư khổng lồ này.
+
+Lâu đài trên lưng Côn Bằng chính là bằng chứng rõ ràng nhất về sự hợp tác đặc biệt và duy nhất giữa nhân loại và siêu thú. Tuy về mặt sức mạnh Côn Bằng là cá thể siêu thú yếu nhất, nhưng những phước lành mà nó mang lại cho thế giới này lại nhiều hơn tất cả các cá thể siêu thú khác cộng lại.
+
+Có truyền thuyết cho rằng khi hành tinh này lại một lần nữa đứng trước diệt vong, Côn Bằng sẽ thức tỉnh và hợp nhất với lõi trái đất qua quá trình Kình Lạc. Nhưng chính vì sẽ mất đi một đồng minh thân cận, như một người mẹ, người cha luôn gồng mình hi sinh bảo vệ cho nhân loại, cá thể Côn Bằng cuối cùng này sẽ được nhân loại thủ hộ tới cùng. Toà lâu đài trên lưng Côn Bằng chính là minh chứng rõ ràng nhất cho một lời thề không khế ước rằng Côn Bằng và nhân loại sẽ luôn luôn cộng sinh và chở che cho nhau.</div>
+        <button type="button" class="more" id="moreBtn" data-i="read_more">Đọc toàn bộ</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band deep" id="chronicle">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i="chron_eyebrow">Chương II · Biên niên sử Kình Lạc</div>
+      <h2 data-i="chron_h">Năm lần thế giới chết. Năm người mẹ rơi xuống.</h2>
+      <p class="lead" style="margin-top:1.4rem" data-i="chron_lead">Mỗi đại tuyệt chủng trong lịch sử Trái Đất là một lần Côn Bằng mẹ hi sinh. Mỗi lần, bà để lại đúng một đứa con.</p>
+      <p class="muted" data-i="chron_note">Niên đại và mức thiệt hại bên dưới là số liệu địa chất thực tế, làm tròn và ghi là ước tính. Tên gọi của từng thế hệ là gợi ý thiết kế, không có trong nguyên bản.</p>
+    </div>
+    <ol class="timeline" id="timeline"></ol>
+    <div class="legacy reveal">
+      <div class="stat"><b>5</b><span data-i="lg1">Lần Kình Lạc</span><small data-i="lg1s">Mỗi lần là một đại tuyệt chủng được đảo ngược.</small></div>
+      <div class="stat"><b>5 → 1</b><span data-i="lg2">Dòng dõi</span><small data-i="lg2s">Mỗi người mẹ để lại đúng một đứa con. Không bao giờ hơn.</small></div>
+      <div class="stat"><b>≈ 444 Tr.</b><span data-i="lg3">Năm thủ hộ</span><small data-i="lg3s">Từ lần rơi đầu tiên đến nay, tính bằng triệu năm.</small></div>
+      <div class="stat"><b>0</b><span data-i="lg4">Lần Kình Lạc còn được phép</span><small data-i="lg4s">Đứa con cuối cùng là giống đực. Lần rơi tiếp theo là lần cuối.</small></div>
+    </div>
+  </div>
+</section>
+<section class="band" id="whalefall">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i="wf_eyebrow">Chương III · Kình Lạc</div>
+      <h2 data-i="wf_h">Một cái chết nuôi sống cả thế giới trong một trăm năm</h2>
+      <p class="lead" style="margin-top:1.4rem" data-i="wf_lead">Ngoài đời thực, khi một con cá voi chết và chìm xuống đáy biển sâu, xác của nó trở thành một ốc đảo sự sống kéo dài hàng thập kỷ. Huyền thoại Côn Bằng phóng đại điều đó lên quy mô hành tinh.</p>
+      <p class="muted" data-i="wf_note">Chọn một giai đoạn để xem song song: hiện tượng sinh học thật, và tầng nghĩa trong huyền thoại.</p>
+    </div>
+    <div class="wf">
+      <div class="depth reveal" aria-hidden="true">
+        <svg viewBox="0 0 520 600" id="depthSvg">
+          <defs>
+            <linearGradient id="dg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2a5e"/><stop offset="1" stop-color="#04061a"/></linearGradient>
+            <filter id="g3" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+          </defs>
+          <rect width="520" height="600" fill="url(#dg)"/>
+          <g id="depthMarks" font-family="JetBrains Mono,monospace" font-size="10" fill="#a9a393" letter-spacing="1">
+            <line x1="40" y1="40" x2="480" y2="40" stroke="#bfaaff" stroke-opacity=".18"/><text x="42" y="32">0 m · MẶT NƯỚC</text>
+            <line x1="40" y1="200" x2="480" y2="200" stroke="#bfaaff" stroke-opacity=".12" stroke-dasharray="2 6"/><text x="42" y="192">1 000 m · VÙNG TỐI</text>
+            <line x1="40" y1="380" x2="480" y2="380" stroke="#bfaaff" stroke-opacity=".12" stroke-dasharray="2 6"/><text x="42" y="372">2 000 m · VÙNG THẲM</text>
+            <line x1="40" y1="540" x2="480" y2="540" stroke="#5fd39a" stroke-opacity=".35"/><text x="42" y="558" fill="#5fd39a">ĐÁY · LÕI</text>
+          </g>
+          <!-- sinking whale (small) -->
+          <g id="wfWhale" transform="translate(140,70)">
+            <path d="M 10 40 C 20 20, 60 10, 110 10 C 160 10, 210 20, 240 36 C 255 30, 270 22, 285 18 C 278 30, 270 38, 265 42 C 270 46, 278 54, 285 66 C 270 60, 255 54, 240 50 C 210 62, 160 72, 110 72 C 60 72, 20 60, 10 40 Z" fill="#243160" stroke="#5c6fb0"/>
+            <circle cx="50" cy="38" r="2.5" fill="#f2b84b"/>
+          </g>
+          <!-- stages dots -->
+          <g id="wfStages">
+            <g data-stage="0" transform="translate(90,120)"><circle r="18" fill="#e4654f" opacity=".15" filter="url(#g3)"/><circle r="4" fill="#e4654f"/></g>
+            <g data-stage="1" transform="translate(420,250)"><circle r="18" fill="#f2b84b" opacity=".15" filter="url(#g3)"/><circle r="4" fill="#f2b84b"/></g>
+            <g data-stage="2" transform="translate(100,420)"><circle r="18" fill="#a855f7" opacity=".15" filter="url(#g3)"/><circle r="4" fill="#a855f7"/></g>
+            <g data-stage="3" transform="translate(410,520)"><circle r="18" fill="#5fd39a" opacity=".15" filter="url(#g3)"/><circle r="4" fill="#5fd39a"/></g>
+          </g>
+          <!-- bloom at bottom -->
+          <g id="wfBloom" stroke="#5fd39a" fill="none" stroke-width="1.2" opacity=".8">
+            <path d="M 120 540 q 10 -40 0 -80" /><path d="M 160 540 q -14 -30 6 -60"/><path d="M 300 540 q 12 -50 -4 -90"/><path d="M 340 540 q -8 -30 10 -60"/><path d="M 230 540 q 6 -70 -10 -110"/>
+            <circle cx="120" cy="458" r="4" fill="#5fd39a"/><circle cx="166" cy="480" r="3" fill="#5fd39a"/><circle cx="296" cy="450" r="4.5" fill="#5fd39a"/><circle cx="350" cy="480" r="3" fill="#5fd39a"/><circle cx="220" cy="430" r="5" fill="#5fd39a"/>
+          </g>
+        </svg>
+      </div>
+      <div class="stages reveal" id="stages"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band deep" id="beasts">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i="b_eyebrow">Chương IV · Thất Thú</div>
+      <h2 data-i="b_h">Bảy siêu thú. Một con yếu nhất. Nó cho đi nhiều hơn sáu con còn lại cộng lại.</h2>
+      <p class="lead" style="margin-top:1.4rem" data-i="b_lead">Nguyên bản chỉ hé lộ một điều về sáu siêu thú kia: chúng mạnh hơn Côn Bằng, và “trận chiến tàn khốc” sẽ được tiết lộ dần khi chúng xuất hiện. Sáu ô bên dưới cố tình để trống.</p>
+    </div>
+    <div class="beasts reveal" id="beastGrid"></div>
+    <div class="meters reveal pending" id="meters">
+      <div class="meter"><div class="lbl"><span data-i="mt1">Sức mạnh chiến đấu</span><b data-i="mt1v">Thấp nhất trong Thất Thú</b></div><div class="bar"><i style="--v:14%;--c:var(--danger)"></i></div><div class="note" data-i="mt1n">Canon: “về mặt sức mạnh Côn Bằng là cá thể siêu thú yếu nhất.”</div></div>
+      <div class="meter"><div class="lbl"><span data-i="mt2">Phước lành ban xuống thế giới</span><b data-i="mt2v">Vượt tổng sáu siêu thú còn lại</b></div><div class="bar"><i style="--v:100%;--c:var(--bloom)"></i></div><div class="note" data-i="mt2n">Canon: “nhiều hơn tất cả các cá thể siêu thú khác cộng lại.”</div></div>
+      <div class="meter"><div class="lbl"><span data-i="mt3">Kích thước so với Côn Bằng mẹ</span><b data-i="mt3v">Vượt trội</b></div><div class="bar"><i style="--v:82%;--c:var(--lantern)"></i></div><div class="note" data-i="mt3n">Canon: cá thể đực “vượt trội so với các cá thể cái” về kích thước lẫn phước lành.</div></div>
+      <div class="meter"><div class="lbl"><span data-i="mt4">Cái giá của Kình Lạc tiếp theo</span><b data-i="mt4v">Tuyệt chủng giống loài</b></div><div class="bar"><i style="--v:100%;--c:var(--crystal)"></i></div><div class="note" data-i="mt4n">Canon: “sẽ là dấu chấm hết cho giống loài này.”</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="seals">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i="s_eyebrow">Chương V · Phong ấn pha lê tím</div>
+      <h2 data-i="s_h">Nhân loại đã chặn một cái chết đang diễn ra</h2>
+      <p class="lead" style="margin-top:1.4rem" data-i="s_lead">Sau trận chiến tàn khốc, Côn Bằng định hi sinh. Kình Lạc đã bắt đầu. Nhân loại giữ nó lại bằng những phiến pha lê tím bay quanh thân nó, và chưa bao giờ buông tay.</p>
+      <p class="muted" data-i="s_note">Nguyên bản không nói có bao nhiêu phong ấn, cũng không nói mỗi phiến làm gì. Vòng bảy ấn dưới đây là một đề xuất: một ấn cho mỗi siêu thú, để cái chết của con yếu nhất bị giữ lại bởi chính sức nặng của Thất Thú. Chạm vào từng phiến để xem.</p>
+    </div>
+    <div class="seals">
+      <div class="ring reveal">
+        <svg viewBox="0 0 520 520" id="ringSvg">
+          <defs><filter id="glow2" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <circle class="orbit" cx="260" cy="260" r="200"/>
+          <circle class="orbit" cx="260" cy="260" r="130" style="stroke-dasharray:1 8"/>
+          <circle class="pulse" cx="260" cy="260" r="120"/>
+          <circle class="pulse" cx="260" cy="260" r="120" style="animation-delay:2s"/>
+          <path class="heart" d="M 190 262 C 200 230, 240 215, 280 215 C 320 215, 350 232, 370 258 C 362 262, 356 266, 352 270 C 356 276, 362 284, 368 294 C 350 286, 332 280, 316 276 C 290 290, 250 294, 220 286 C 204 280, 194 272, 190 262 Z"/>
+          <circle cx="222" cy="250" r="2.6" fill="#f2b84b"/>
+          <g id="sealRing"></g>
+        </svg>
+      </div>
+      <div class="sealinfo reveal" id="sealInfo" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+<section class="band deep" id="citadel">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i="c_eyebrow">Chương VI · Lâu đài trên lưng</div>
+      <h2 data-i="c_h">Một pháo đài xây trên một người đang hấp hối, để người đó không chết</h2>
+      <p class="lead" style="margin-top:1.4rem" data-i="c_lead">Lâu đài là bằng chứng duy nhất về sự hợp tác giữa nhân loại và một siêu thú. Nó vừa là nhà, vừa là trạm gác, vừa là lời thề được xây bằng đá.</p>
+      <p class="muted" data-i="c_note">Mặt cắt dưới đây là thiết kế mở rộng. Những khu được gắn nhãn Canon suy ra trực tiếp từ nguyên bản; phần còn lại là đề xuất để thế giới có chỗ cho con người sống trong đó.</p>
+    </div>
+    <div class="citadel">
+      <div class="cross reveal">
+        <svg viewBox="0 0 760 460" id="crossSvg" aria-label="Mặt cắt lâu đài trên lưng Côn Bằng">
+          <!-- whale back -->
+          <path class="deck" d="M 0 400 C 150 370, 300 352, 380 350 C 480 350, 640 368, 760 400 L 760 460 L 0 460 Z"/>
+          <path d="M 0 400 C 150 370, 300 352, 380 350 C 480 350, 640 368, 760 400" fill="none" stroke="#5fd39a" stroke-opacity=".35" stroke-width="6" filter="url(#soft)"/>
+          <!-- seal core shaft into the back -->
+          <rect class="stone2" x="350" y="300" width="60" height="110"/>
+          <polygon points="380,330 396,360 380,392 364,360" fill="#a855f7" filter="url(#glow)"/>
+          <!-- foundation hall (vow hall) -->
+          <rect class="stone" x="110" y="270" width="540" height="56"/>
+          <line x1="150" y1="270" x2="150" y2="326" stroke="#4a4566"/><line x1="230" y1="270" x2="230" y2="326" stroke="#4a4566"/><line x1="530" y1="270" x2="530" y2="326" stroke="#4a4566"/><line x1="610" y1="270" x2="610" y2="326" stroke="#4a4566"/>
+          <!-- lodgings / sanctuary wing (left) -->
+          <rect class="stone2" x="110" y="200" width="200" height="70"/>
+          <g fill="#f2b84b" opacity=".9"><rect x="130" y="218" width="8" height="12"/><rect x="160" y="218" width="8" height="12"/><rect x="190" y="218" width="8" height="12"/><rect x="220" y="218" width="8" height="12"/><rect x="250" y="218" width="8" height="12"/><rect x="280" y="218" width="8" height="12"/></g>
+          <!-- memorial wing (right) -->
+          <rect class="stone2" x="450" y="200" width="200" height="70"/>
+          <g fill="#243160" stroke="#5c6fb0" stroke-width=".8"><ellipse cx="480" cy="238" rx="14" ry="6"/><ellipse cx="516" cy="238" rx="14" ry="6"/><ellipse cx="552" cy="238" rx="14" ry="6"/><ellipse cx="588" cy="238" rx="14" ry="6"/><ellipse cx="624" cy="238" rx="14" ry="6"/></g>
+          <!-- keep -->
+          <rect class="stone" x="320" y="110" width="120" height="160"/>
+          <path class="stone" d="M 310 110 L 380 40 L 450 110 Z"/>
+          <circle cx="380" cy="72" r="9" fill="#a855f7" filter="url(#glow)"/>
+          <g fill="#f2b84b"><rect x="345" y="140" width="8" height="12"/><rect x="376" y="140" width="8" height="12"/><rect x="407" y="140" width="8" height="12"/><rect x="345" y="180" width="8" height="12"/><rect x="407" y="180" width="8" height="12"/></g>
+          <!-- towers -->
+          <rect class="stone" x="60" y="150" width="50" height="120"/><path class="stone" d="M 52 150 L 85 100 L 118 150 Z"/>
+          <rect class="stone" x="650" y="160" width="50" height="110"/><path class="stone" d="M 642 160 L 675 112 L 708 160 Z"/>
+          <!-- hotspots -->
+          <g id="hotspots">
+            <g class="hot" data-room="0" tabindex="0" role="button"><circle cx="380" cy="72" r="7"/><text x="394" y="76">01</text></g>
+            <g class="hot" data-room="1" tabindex="0" role="button"><circle cx="380" cy="298" r="7"/><text x="394" y="302">02</text></g>
+            <g class="hot" data-room="2" tabindex="0" role="button"><circle cx="380" cy="360" r="7"/><text x="394" y="364">03</text></g>
+            <g class="hot" data-room="3" tabindex="0" role="button"><circle cx="550" cy="238" r="7"/><text x="564" y="242">04</text></g>
+            <g class="hot" data-room="4" tabindex="0" role="button"><circle cx="210" cy="238" r="7"/><text x="224" y="242">05</text></g>
+            <g class="hot" data-room="5" tabindex="0" role="button"><circle cx="85" cy="130" r="7"/><text x="99" y="134">06</text></g>
+          </g>
+        </svg>
+      </div>
+      <div class="rooms reveal" id="rooms"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band vow" id="vow">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" style="justify-content:center" data-i="v_eyebrow">Chương VII · Lời thề không khế ước</div>
+      <h2 data-i="v_h">Không chữ ký. Không điều khoản. Chỉ có một toà lâu đài.</h2>
+      <blockquote id="vowQuote" data-i="v_quote">Có truyền thuyết rằng khi hành tinh này một lần nữa đứng trước diệt vong, Côn Bằng sẽ thức tỉnh và hợp nhất với lõi Trái Đất qua Kình Lạc. Nhưng vì sẽ mất đi một đồng minh thân cận, <em>như một người mẹ, người cha luôn gồng mình hi sinh để bảo vệ nhân loại</em>, cá thể Côn Bằng cuối cùng này sẽ được nhân loại thủ hộ tới cùng.</blockquote>
+      <p class="legend" data-i="v_legend">Toà lâu đài trên lưng Côn Bằng là minh chứng rõ ràng nhất cho một lời thề không khế ước: Côn Bằng và nhân loại sẽ luôn luôn cộng sinh và chở che cho nhau. Người đã cứu thế giới năm lần bằng cái chết của mẹ mình. Lần này, thế giới quyết định không để người chết.</p>
+      <svg class="sigil" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#a855f7" stroke-opacity=".5" stroke-dasharray="3 5"/>
+        <polygon points="60,18 70,40 60,62 50,40" fill="#a855f7" filter="url(#glow)"/>
+        <path d="M 30 78 C 40 64, 70 60, 92 70 C 86 74, 82 78, 80 82 C 70 90, 46 90, 30 78 Z" fill="#243160" stroke="#5c6fb0"/>
+        <rect x="56" y="58" width="8" height="12" fill="#1b1526" stroke="#4a3b5e"/><rect x="59" y="62" width="2" height="3" fill="#f2b84b"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="band deep" id="bible">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i="bb_eyebrow">Phụ lục · Sổ tay thế giới</div>
+      <h2 data-i="bb_h">Điều gì đã là canon, điều gì còn bỏ ngỏ</h2>
+      <p class="lead" style="margin-top:1.4rem" data-i="bb_lead">Dành cho người viết tiếp. Cột trái là những gì nguyên bản đã khoá. Cột phải là những câu hỏi mà bất kỳ dự án nào xây quanh Côn Bằng cũng phải trả lời.</p>
+    </div>
+    <div class="bible reveal">
+      <div><h3><span class="tag canon">Canon</span><span data-i="bb_c">Đã xác lập</span></h3><ul id="canonList"></ul></div>
+      <div><h3><span class="tag open" data-i="bb_o_tag">Mở</span><span data-i="bb_o">Câu hỏi còn bỏ ngỏ</span></h3><ul id="openList"></ul></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span data-i="f1">Cốt truyện gốc: bạn của Mark · Trang web: dựng từ nguyên bản tiếng Việt</span>
+    <span data-i="f2">Côn Bằng · Kình Lạc · Thất Thú</span>
+  </div>
+</footer>
+</div>
+<script>
+// ---------- Content (VI / EN) ----------
+const D = {
+epochs: [
+ {n:"I", vi:{name:"Mẹ Ordovic", title:"Đại tuyệt chủng Ordovic–Silur", when:"≈ 444 triệu năm trước", body:"Biển đóng băng, mực nước rút, hầu hết sự sống còn nằm dưới nước. Người mẹ đầu tiên rơi xuống đại dương đang chết và sưởi ấm nó từ bên trong. Đứa con bà để lại học bay trên một thế giới chưa có cây."},
+          en:{name:"The Ordovician Mother", title:"Ordovician–Silurian extinction", when:"≈ 444 million years ago", body:"Seas froze and sea levels fell while nearly all life still lived underwater. The first mother fell into a dying ocean and warmed it from within. The child she left learned to fly over a world without trees."}, loss:"≈ 85%", lossNote:{vi:"loài biển mất đi (ước tính)",en:"of marine species lost (est.)"}},
+ {n:"II", vi:{name:"Mẹ Devon", title:"Đại tuyệt chủng kỷ Devon muộn", when:"≈ 372 triệu năm trước", body:"Các rạn san hô sụp đổ, đại dương thiếu oxy. Lần Kình Lạc thứ hai kéo dài hàng triệu năm, vì cái chết lần này cũng kéo dài như vậy. Rừng đầu tiên mọc lên trên những gì còn lại của bà."},
+          en:{name:"The Devonian Mother", title:"Late Devonian extinction", when:"≈ 372 million years ago", body:"Reef systems collapsed and the oceans ran out of oxygen. The second whale fall lasted millions of years, because this dying did too. The first forests grew on what remained of her."}, loss:"≈ 75%", lossNote:{vi:"loài mất đi (ước tính)",en:"of species lost (est.)"}},
+ {n:"III", vi:{name:"Mẹ Permi", title:"Đại tuyệt chủng Permi–Trias", when:"≈ 252 triệu năm trước", body:"“Cái chết vĩ đại.” Núi lửa Siberia nung chín khí quyển. Đây là lần duy nhất sự sống gần như bị xoá sạch, và là lần Kình Lạc lớn nhất. Trong lâu đài có người tin rằng lõi Trái Đất đã học được tên Côn Bằng từ lần này."},
+          en:{name:"The Permian Mother", title:"Permian–Triassic extinction", when:"≈ 252 million years ago", body:"The Great Dying. Siberian volcanism cooked the atmosphere. The only time life was nearly erased, and the greatest whale fall. Some in the citadel believe the planet's core learned the name Côn Bằng that day."}, loss:"≈ 96%", lossNote:{vi:"loài biển mất đi (ước tính)",en:"of marine species lost (est.)"}},
+ {n:"IV", vi:{name:"Mẹ Trias", title:"Đại tuyệt chủng Trias–Jura", when:"≈ 201 triệu năm trước", body:"Siêu lục địa Pangaea nứt ra. Người mẹ thứ tư rơi xuống đúng đường nứt, và khủng long thừa hưởng thế giới mà bà để lại. Đứa con của bà là cá thể sống lâu nhất trong dòng dõi."},
+          en:{name:"The Triassic Mother", title:"Triassic–Jurassic extinction", when:"≈ 201 million years ago", body:"Pangaea tore apart. The fourth mother fell along the rift itself, and dinosaurs inherited the world she left behind. Her child became the longest-lived of the lineage."}, loss:"≈ 80%", lossNote:{vi:"loài mất đi (ước tính)",en:"of species lost (est.)"}},
+ {n:"V", vi:{name:"Mẹ Phấn Trắng", title:"Đại tuyệt chủng Kỷ Phấn Trắng–Cổ Cận", when:"≈ 66 triệu năm trước", body:"Thiên thạch Chicxulub. Trời tối hàng năm. Người mẹ cuối cùng rơi xuống trong bóng tối ấy, và lần đầu tiên, đứa con bà để lại là giống đực. Lớn hơn. Phước lành dày hơn. Và là người cuối cùng."},
+          en:{name:"The Cretaceous Mother", title:"Cretaceous–Paleogene extinction", when:"≈ 66 million years ago", body:"The Chicxulub impact. Years of darkness. The last mother fell in that dark, and for the first time the child she left was male. Larger. Richer in blessing. And the last."}, loss:"≈ 76%", lossNote:{vi:"loài mất đi (ước tính)",en:"of species lost (est.)"}}
+],
+stages: [
+ {vi:{t:"Thân rơi", s:"Mobile-scavenger stage · vài tháng đến 2 năm", p:"<b>Thực tế:</b> cá mập ngủ, cá mút đá và cua lột bỏ phần mềm với tốc độ hàng chục kg mỗi ngày.<br><b>Huyền thoại:</b> Côn Bằng mẹ rơi xuyên qua tầng khí quyển đang chết; sức nóng của thân thể bà là ngọn lửa đầu tiên."},
+  en:{t:"The Fall", s:"Mobile-scavenger stage · months to 2 years", p:"<b>Real:</b> sleeper sharks, hagfish and crabs strip the soft tissue at tens of kilograms a day.<br><b>Myth:</b> the mother falls through a dying sky; the heat of her body is the first fire."}},
+ {vi:{t:"Dưỡng sinh", s:"Enrichment-opportunist stage · vài tháng đến vài năm", p:"<b>Thực tế:</b> giun nhiều tơ, động vật giáp xác lấp đầy lớp trầm tích giàu chất hữu cơ quanh xác, mật độ cao gấp hàng trăm lần đáy biển bình thường.<br><b>Huyền thoại:</b> đất đai quanh nơi bà nằm xuống hồi phục trước; những sinh vật nhỏ nhất quay lại đầu tiên."},
+  en:{t:"Enrichment", s:"Enrichment-opportunist stage · months to years", p:"<b>Real:</b> polychaete worms and crustaceans crowd the organic-rich sediment around the carcass, hundreds of times denser than the normal seafloor.<br><b>Myth:</b> the land where she lies heals first; the smallest creatures return before anyone else."}},
+ {vi:{t:"Hồi thở", s:"Sulfophilic stage · hàng chục năm, có thể tới 50–100 năm", p:"<b>Thực tế:</b> vi khuẩn phân huỷ mỡ trong xương sinh ra sulfide; cả một cộng đồng hoá dưỡng sống trên bộ xương như trên một miệng phun thuỷ nhiệt. Giun Osedax “ăn xương” được phát hiện chính ở giai đoạn này.<br><b>Huyền thoại:</b> xương của bà trở thành mạch, phước lành thấm vào lõi đất và lan đi khắp hành tinh."},
+  en:{t:"The Breath Returns", s:"Sulfophilic stage · decades, up to 50–100 years", p:"<b>Real:</b> bacteria break down lipids in the bones and release sulfide; a chemosynthetic community lives on the skeleton as if on a hydrothermal vent. The bone-eating Osedax worms were discovered at exactly this stage.<br><b>Myth:</b> her bones become veins; the blessing seeps into the core and spreads across the planet."}},
+ {vi:{t:"Tái sinh", s:"Reef stage · phần còn lại của bộ xương", p:"<b>Thực tế:</b> khi chất hữu cơ cạn, bộ xương khoáng hoá thành giá thể cứng cho san hô mềm, hải quỳ và bọt biển bám lên.<br><b>Huyền thoại:</b> thế giới sống lại trên nền móng của bà. Đứa con bà để lại bay lên và tiếp tục hành trình."},
+  en:{t:"Rebirth", s:"Reef stage · the skeleton that remains", p:"<b>Real:</b> once the organics are gone, the mineralised skeleton becomes hard substrate for soft corals, anemones and sponges.<br><b>Myth:</b> the world lives again on her foundations. The child she left rises and carries the journey on."}}
+],
+beasts: [
+ {k:"conbang", vi:{n:"Côn Bằng", s:"Kình ngư · Phước lành"}, en:{n:"Côn Bằng", s:"Leviathan · Blessing"}},
+ {k:"?", vi:{n:"???", s:"Sẽ tiết lộ"}, en:{n:"???", s:"To be revealed"}},
+ {k:"?", vi:{n:"???", s:"Sẽ tiết lộ"}, en:{n:"???", s:"To be revealed"}},
+ {k:"?", vi:{n:"???", s:"Sẽ tiết lộ"}, en:{n:"???", s:"To be revealed"}},
+ {k:"?", vi:{n:"???", s:"Sẽ tiết lộ"}, en:{n:"???", s:"To be revealed"}},
+ {k:"?", vi:{n:"???", s:"Sẽ tiết lộ"}, en:{n:"???", s:"To be revealed"}},
+ {k:"?", vi:{n:"???", s:"Sẽ tiết lộ"}, en:{n:"???", s:"To be revealed"}}
+],
+seals: [
+ {id:"Tĩnh", stab:97, vi:{t:"Ấn Tĩnh Mạch", p:"Làm chậm nhịp tim của Côn Bằng xuống một nhịp mỗi vài phút. Kình Lạc bắt đầu bằng một cơn sốt; phiến này giữ cơn sốt không lan.", r:"Được canh bởi những người chữa lành. Nếu nhịp tim tăng, tháp phía đông đổ chuông."},
+  en:{t:"Seal of the Still Pulse", p:"Slows Côn Bằng's heartbeat to one beat every few minutes. Whale fall begins as a fever; this seal keeps the fever from spreading.", r:"Kept by the healers. If the pulse quickens, the eastern tower rings."}},
+ {id:"Khí", stab:91, vi:{t:"Ấn Khí", p:"Giữ hơi thở và sức nâng. Một Côn Bằng đang Kình Lạc sẽ rơi; phiến này là lý do nó vẫn còn trên trời.", r:"Yếu nhất về mặt vật lý. Được gia cố mỗi mùa đông."},
+  en:{t:"Seal of Breath", p:"Holds breath and lift. A Côn Bằng in whale fall sinks; this seal is why he is still in the sky.", r:"The physically weakest seal. Reinforced every winter."}},
+ {id:"Nhiệt", stab:88, vi:{t:"Ấn Nhiệt", p:"Khoá sức nóng khổng lồ trong thân thể lại, thay vì để nó trút xuống đất như một lần Kình Lạc. Đây là lý do lâu đài luôn ấm.", r:"Những ngày phiến này mờ đi, mùa màng dưới đường bay bội thu bất thường. Không ai dám mừng."},
+  en:{t:"Seal of Heat", p:"Locks the immense heat of his body inside, instead of letting it pour into the earth as a whale fall would. It is why the citadel is always warm.", r:"On days this seal dims, harvests beneath the flight path are unnaturally rich. No one dares celebrate."}},
+ {id:"Quang", stab:94, vi:{t:"Ấn Hồi Quang", p:"Bẻ hào quang phục sinh ra khỏi thân thể và rải xuống mặt đất, để phước lành vẫn tiếp tục dù Kình Lạc bị dừng. Chính phiến này cho phép rừng dưới đường bay hồi sinh.", r:"Do đó, phước lành của Côn Bằng ngày nay là mượn trước từ cái chết của chính nó."},
+  en:{t:"Seal of Returning Light", p:"Bends the resurrection aura away from his body and scatters it over the land, so the blessing continues even with the fall halted. This is why the forests beneath him still heal.", r:"So today's blessing is borrowed against his own death."}},
+ {id:"Mộng", stab:79, vi:{t:"Ấn Mộng", p:"Giữ Côn Bằng trong giấc ngủ nửa tỉnh. Một Côn Bằng tỉnh hẳn sẽ nhớ ra điều nó định làm.", r:"Phiến bất ổn nhất. Những đêm nó nhấp nháy, cả lâu đài nghe thấy tiếng hát."},
+  en:{t:"Seal of Dreaming", p:"Keeps Côn Bằng half-asleep. A fully woken Côn Bằng would remember what he meant to do.", r:"The least stable seal. On nights it flickers, the whole citadel hears him sing."}},
+ {id:"Trọng", stab:90, vi:{t:"Ấn Trọng", p:"Neo thân thể vào bầu trời thay vì vào lõi đất. Truyền thuyết nói Kình Lạc cuối cùng sẽ kết thúc bằng việc hợp nhất với lõi Trái Đất; phiến này là sợi dây kéo ngược.", r:"Được vận hành từ đài quan sát trên đỉnh tháp chính."},
+  en:{t:"Seal of Weight", p:"Anchors his body to the sky rather than to the planet's core. Legend says the final whale fall ends in union with the core; this seal is the rope that pulls the other way.", r:"Operated from the observatory atop the keep."}},
+ {id:"Thệ", stab:100, vi:{t:"Ấn Thệ", p:"Phiến thứ bảy không giữ thân thể. Nó giữ lời hứa. Nó chỉ tan khi nhân loại đồng lòng buông tay, và cho tới nay chưa ai đề nghị điều đó.", r:"Canon gọi đây là “lời thề không khế ước”. Lâu đài là thân xác của phiến này."},
+  en:{t:"Seal of the Vow", p:"The seventh seal holds no body. It holds a promise. It dissolves only when humanity agrees as one to let go, and no one has ever proposed it.", r:"Canon calls this the vow without a contract. The citadel is this seal's body."}}
+],
+rooms: [
+ {tag:"ext", vi:{n:"Đài Quan Sát", d:"Đỉnh tháp chính. Nơi theo dõi bảy phong ấn và dõi theo chân trời tìm dấu hiệu của sáu siêu thú còn lại."}, en:{n:"The Observatory", d:"Top of the keep. Here the seven seals are watched, and the horizon scanned for signs of the other six beasts."}},
+ {tag:"canon", vi:{n:"Sảnh Lời Thề", d:"Nền móng của lâu đài, nơi khởi đầu sự hợp tác giữa nhân loại và siêu thú. Không có văn bản nào được ký ở đây. Đó là điểm chính."}, en:{n:"Hall of the Vow", d:"The citadel's foundation, where the alliance between humanity and a super beast began. No document was ever signed here. That is the point."}},
+ {tag:"canon", vi:{n:"Lõi Phong Ấn", d:"Trục xuyên xuống lưng Côn Bằng, nơi các phiến pha lê tím được điều phối. Đây là chỗ Kình Lạc đã bị chặn lại giữa chừng."}, en:{n:"The Seal Core", d:"A shaft sunk into Côn Bằng's back where the purple crystal seals are coordinated. This is where the whale fall was stopped mid-way."}},
+ {tag:"ext", vi:{n:"Đài Tưởng Niệm Ngũ Mẫu", d:"Năm phiến đá hình kình ngư cho năm Côn Bằng mẹ. Mỗi năm, vào ngày lâu đài bay qua nơi một người mẹ rơi xuống, người ta tắt hết đèn lồng."}, en:{n:"Memorial of the Five Mothers", d:"Five whale-shaped stones for five mothers. Each year, on the day the citadel passes a place where a mother fell, every lantern is put out."}},
+ {tag:"ext", vi:{n:"Khu Trú Ngụ", d:"Nơi ở của người gác, người chữa lành, học giả, và những lữ khách được phép lên lưng Côn Bằng. Đây là chỗ cho một câu chuyện về lòng hiếu khách trên trời."}, en:{n:"The Lodgings", d:"Quarters for keepers, healers, scholars, and the travellers permitted onto Côn Bằng's back. Room here for a story about hospitality in the sky."}},
+ {tag:"ext", vi:{n:"Tháp Chuông Tây", d:"Đổ chuông khi một phong ấn mờ đi. Trong lịch sử lâu đài, chuông đã đổ ba lần."}, en:{n:"The West Bell Tower", d:"Rings when a seal dims. In the citadel's history, the bell has rung three times."}}
+],
+canon: {
+ vi:["<b>Côn Bằng là một nhóm loài</b>, không phải một cá thể. <q>đây dường như là 1 nhóm loài</q>",
+     "<b>Luôn có một Côn Bằng mẹ</b> tăng trao đổi chất của muôn loài và hồi phục rừng khi bay qua.",
+     "<b>Năm lần Kình Lạc</b> ứng với năm đại tuyệt chủng: Ordovic–Silur, Devon, Permi–Trias, Jura, Phấn Trắng.",
+     "<b>Mỗi lần để lại đúng một con</b> và nó kế thừa sứ mệnh.",
+     "<b>Cá thể cuối cùng là giống đực</b>: lớn hơn, phước lành vượt trội, nhưng Kình Lạc của nó là dấu chấm hết cho giống loài.",
+     "<b>Có một trận chiến tàn khốc</b> trước khi nó định hi sinh; chi tiết sẽ lộ dần khi 7 siêu thú xuất hiện.",
+     "<b>Nhân loại chặn Kình Lạc</b> bằng các phong ấn pha lê tím bay quanh thân nó.",
+     "<b>Lâu đài trên lưng</b> là bằng chứng về sự hợp tác duy nhất giữa nhân loại và một siêu thú.",
+     "<b>Yếu nhất trong Thất Thú</b> về sức mạnh, nhưng phước lành nhiều hơn sáu con còn lại cộng lại.",
+     "<b>Truyền thuyết:</b> khi thế giới lại đứng trước diệt vong, nó sẽ thức tỉnh và hợp nhất với lõi Trái Đất qua Kình Lạc.",
+     "<b>Lời thề không khế ước:</b> Côn Bằng và nhân loại luôn cộng sinh và chở che cho nhau."],
+ en:["<b>Côn Bằng is a lineage</b>, not one individual. <q>it seems to be a group of species</q>",
+     "<b>There is always a mother Côn Bằng</b> who raises the metabolism of living things and heals forests she flies over.",
+     "<b>Five whale falls</b> match the five mass extinctions: Ordovician–Silurian, Devonian, Permian–Triassic, Jurassic, Cretaceous.",
+     "<b>Each fall leaves exactly one child</b>, who inherits the mission.",
+     "<b>The last-born is male</b>: larger, greater in blessing, but his whale fall would end the species.",
+     "<b>A brutal battle</b> preceded his attempt to sacrifice himself; details emerge as the 7 super beasts appear.",
+     "<b>Humanity halted the whale fall</b> with purple crystal seals orbiting his body.",
+     "<b>The citadel on his back</b> is proof of the only alliance between humanity and a super beast.",
+     "<b>Weakest of the Seven</b> in raw power, yet his blessings exceed the other six combined.",
+     "<b>Legend:</b> when the world faces extinction again he will wake and merge with the planet's core through whale fall.",
+     "<b>The vow without a contract:</b> Côn Bằng and humanity will always live in symbiosis and shelter each other."]
+},
+open: {
+ vi:["<b>Bao nhiêu phong ấn?</b> Nguyên bản chỉ nói “các phong ấn pha lê tím”. Trang này đề xuất bảy, một cho mỗi siêu thú.",
+     "<b>Trận chiến tàn khốc là gì?</b> Ai đánh ai, và tại sao Côn Bằng thua đến mức muốn Kình Lạc?",
+     "<b>Sáu siêu thú kia là ai?</b> Chúng đối địch, trung lập, hay cũng từng được nhân loại tiếp cận?",
+     "<b>Phước lành còn hoạt động khi Kình Lạc bị chặn không?</b> Nếu có, bằng cách nào, và cái giá là gì?",
+     "<b>Ai sống trong lâu đài?</b> Một trật tự thủ hộ, một thành phố, hay cả hai?",
+     "<b>“Hợp nhất với lõi Trái Đất”</b> khác gì năm lần Kình Lạc trước? Điều đó có nghĩa là hành tinh sẽ không bao giờ cần cứu nữa?",
+     "<b>Côn Bằng có đồng ý bị phong ấn không?</b> Sự cộng sinh là thoả thuận, hay là sự giam giữ đầy yêu thương?",
+     "<b>Có cách nào để dòng dõi tiếp tục</b> mà không cần Kình Lạc của cá thể đực?"],
+ en:["<b>How many seals?</b> The source only says “purple crystal seals”. This page proposes seven, one per super beast.",
+     "<b>What was the brutal battle?</b> Who fought whom, and why did Côn Bằng lose badly enough to attempt whale fall?",
+     "<b>Who are the other six beasts?</b> Hostile, neutral, or also once approached by humanity?",
+     "<b>Does the blessing still work with the fall halted?</b> If so, how, and at what cost?",
+     "<b>Who lives in the citadel?</b> A guardian order, a city, or both?",
+     "<b>How does “merging with the core”</b> differ from the five earlier falls? Would the planet never need saving again?",
+     "<b>Did Côn Bằng consent to the seals?</b> Is the symbiosis an agreement, or a loving imprisonment?",
+     "<b>Is there any way for the lineage to continue</b> without the male's whale fall?"]
+},
+ui: {
+ en:{
+  brand_sub:"· Whale Fall", nav_story:"Lore", nav_chron:"Chronicle", nav_wf:"Whale Fall", nav_beasts:"The Seven", nav_seals:"Seals", nav_citadel:"Citadel", nav_vow:"The Vow", nav_bible:"Codex",
+  audio_off:"Ambience", audio_on:"Playing",
+  hero_kicker:"First of the Seven Super Beasts · The citadel on his back",
+  hero_sub:"The last leviathan, and the citadel humanity built on his back to keep him here.",
+  m1_l:"Lineage", m1_v:"5 mothers · 1 last son", m2_l:"Power among the Seven", m2_v:"Weakest", m3_l:"Blessing given", m3_v:"More than the other six combined", m4_l:"Whale fall status", m4_v:"Sealed · Suspended",
+  scroll:"↓ Scroll to descend through the lineage",
+  story_eyebrow:"Chapter I · The Lore", story_h:"Every privilege of this age of peace is the work of Côn Bằng",
+  story_lead:"Plants, animals, soil, growth. None of it is a given. All of it was bought with five whale falls.",
+  kt1:"<b>A colossal whale that flies.</b> Not one creature but a lineage. There is always a mother Côn Bằng, who quickens the metabolism of all living things and heals the forests she passes over.",
+  kt2:"<b>The mother's sacrifice.</b> Borrowed from the real “whale fall”: a dead whale sinks and feeds an entire ecosystem for decades. Here, it resurrects a planet.",
+  kt3_t:"The Seals", kt3:"<b>Purple crystals orbiting Côn Bằng.</b> Built by humanity to halt the last male's whale fall. If he falls, the species ends.",
+  kt4_t:"The Citadel", kt4:"<b>On Côn Bằng's back.</b> The only proof of an alliance between humanity and a super beast. A vow without a contract.",
+  orig_tag:"Original · Canon (Vietnamese)", read_more:"Read the full text", read_less:"Collapse",
+  chron_eyebrow:"Chapter II · Chronicle of the Whale Falls", chron_h:"Five times the world died. Five mothers fell.",
+  chron_lead:"Every mass extinction in Earth's history is a mother Côn Bằng's sacrifice. Each time, she left exactly one child.",
+  chron_note:"Dates and losses below are real geological figures, rounded and marked as estimates. The generation names are a design suggestion and are not in the source text.",
+  lg1:"Whale falls", lg1s:"Each one a mass extinction reversed.", lg2:"Lineage", lg2s:"Each mother left exactly one child. Never more.", lg3:"Years of guardianship", lg3s:"From the first fall to today, in millions of years.", lg4:"Whale falls still allowed", lg4s:"The last child is male. The next fall is the last.",
+  wf_eyebrow:"Chapter III · Whale Fall", wf_h:"One death that feeds a world for a hundred years",
+  wf_lead:"In the real deep sea, a dead whale that sinks to the floor becomes an oasis of life lasting decades. The Côn Bằng myth scales that up to a planet.",
+  wf_note:"Choose a stage to see both at once: the real biology, and the layer of myth over it.",
+  b_eyebrow:"Chapter IV · The Seven Super Beasts", b_h:"Seven super beasts. One is the weakest. It gives more than the other six combined.",
+  b_lead:"The source reveals only one thing about the other six: they are stronger than Côn Bằng, and the “brutal battle” will be revealed as they appear. The six slots below are deliberately empty.",
+  mt1:"Combat power", mt1v:"Lowest of the Seven", mt1n:"Canon: “in terms of power, Côn Bằng is the weakest super beast.”",
+  mt2:"Blessing given to the world", mt2v:"Exceeds the other six combined", mt2n:"Canon: “more than all the other super beasts combined.”",
+  mt3:"Size relative to the mothers", mt3v:"Superior", mt3n:"Canon: the male is “superior to the females” in size and blessing.",
+  mt4:"Cost of the next whale fall", mt4v:"Extinction of the species", mt4n:"Canon: “it will be the end of this species.”",
+  s_eyebrow:"Chapter V · The Purple Crystal Seals", s_h:"Humanity stopped a death already in progress",
+  s_lead:"After the brutal battle, Côn Bằng chose to sacrifice himself. The whale fall had begun. Humanity held him back with purple crystal seals orbiting his body, and has never let go.",
+  s_note:"The source does not say how many seals there are, or what each does. The ring of seven below is a proposal: one seal per super beast, so the weakest one's death is held back by the full weight of the Seven. Tap a seal to inspect it.",
+  seal_stab:"Stability", seal_tag:"Design proposal",
+  c_eyebrow:"Chapter VI · The Citadel on His Back", c_h:"A fortress built on someone dying, so that he will not die",
+  c_lead:"The citadel is the only proof of cooperation between humanity and a super beast. It is a home, a watch post, and a vow built in stone.",
+  c_note:"The cross-section below is an extension. Rooms tagged Canon follow directly from the source; the rest are proposals so the world has room for people to live in it.",
+  v_eyebrow:"Chapter VII · The Vow Without a Contract", v_h:"No signature. No terms. Only a citadel.",
+  v_quote:"Legend says that when this planet once more stands before extinction, Côn Bằng will wake and merge with the Earth's core through whale fall. But because it would mean losing a close ally, <em>like a mother or a father who always strains to sacrifice themselves to protect humanity</em>, this last Côn Bằng will be guarded by humanity to the very end.",
+  v_legend:"The citadel on Côn Bằng's back is the clearest proof of a vow without a contract: Côn Bằng and humanity will always live in symbiosis and shelter one another. He saved the world five times with his mothers' deaths. This time, the world decided not to let him die.",
+  bb_eyebrow:"Appendix · World Codex", bb_h:"What is canon, and what is still open",
+  bb_lead:"For whoever writes next. The left column is what the source has locked. The right column is the questions any project built around Côn Bằng must answer.",
+  bb_c:"Established", bb_o_tag:"Open", bb_o:"Open questions",
+  f1:"Original lore: Mark's friend · Page built from the Vietnamese source", f2:"Côn Bằng · Whale Fall · The Seven",
+  tag_canon:"Canon", tag_ext:"Extension", lossLabel:"Loss", gen:"Generation", epoch_falls:"The fall"
+ },
+ vi:{ audio_off:"Âm thanh", audio_on:"Đang phát", read_more:"Đọc toàn bộ", read_less:"Thu gọn", seal_stab:"Độ ổn định", seal_tag:"Đề xuất thiết kế", tag_canon:"Canon", tag_ext:"Mở rộng", lossLabel:"Thiệt hại", gen:"Thế hệ", epoch_falls:"Lần rơi" }
+}
+};
+</script>
+<script>
+(function(){
+document.documentElement.classList.add('js');
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lang='vi';
+try{ const s=localStorage.getItem('cb-lang'); if(s==='en'||s==='vi') lang=s; }catch(e){}
+// capture VI defaults written in the markup
+$$('[data-i]').forEach(el=>{ const k=el.dataset.i; if(!(k in D.ui.vi)) D.ui.vi[k]=el.innerHTML; });
+const t=k=>(D.ui[lang][k] ?? D.ui.vi[k] ?? D.ui.en[k] ?? '');
+let selStage=0, selSeal=6, selRoom=1;
+
+function renderAll(){
+  $$('[data-i]').forEach(el=>{ const k=el.dataset.i; if(el.id==='audioBtn') return; el.innerHTML=t(k); });
+  $$('.lang button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.lang===lang)));
+  document.documentElement.lang=lang;
+  renderTimeline(); renderStages(); renderBeasts(); renderSeals(); renderRooms(); renderBible(); syncAudioLabel(); syncMore();
+}
+function renderTimeline(){
+  $('#timeline').innerHTML=D.epochs.map((e,i)=>{const L=e[lang];return `<li class="epoch reveal pending">
+   <div class="node">${e.n}</div>
+   <div class="body"><div>
+     <div class="tag ext">${t('gen')} ${e.n} · ${L.name}</div>
+     <h3 style="margin-top:.6rem">${L.title}</h3>
+     <div class="when">${L.when}</div>
+     <p class="muted" style="margin:0">${L.body}</p>
+     <div class="loss"><div><b>${e.loss}</b>${e.lossNote[lang]}</div><div><b class="g">1</b>${lang==='vi'?'đứa con để lại':'child left behind'}</div></div>
+   </div>
+   <div class="fall" aria-hidden="true"><svg viewBox="0 0 300 220"><g class="scene">
+     <g class="w"><path d="M 60 70 C 70 50, 110 40, 150 40 C 190 40, 220 50, 240 62 C 252 56, 262 50, 272 46 C 266 56, 260 62, 256 66 C 260 70, 266 78, 272 88 C 262 82, 250 78, 240 74 C 220 86, 190 94, 150 94 C 110 94, 70 84, 60 70 Z" transform="translate(-10,70)"/></g>
+     <g>${[40,90,140,190,250].map((x,j)=>`<path class="stem" stroke-dasharray="120" d="M ${x} 220 q ${j%2?8:-8} -30 ${j%2?-4:4} -${50+j*8}"/><circle class="seed" cx="${x+(j%2?-4:4)}" cy="${170-j*8}" r="${3+j%3}"/>`).join('')}</g>
+   </g></svg></div></div></li>`}).join('');
+  observeReveals();
+}
+function renderStages(){
+  $('#stages').innerHTML=D.stages.map((s,i)=>{const L=s[lang];return `<div class="stage${i===selStage?' active':''}" data-stage="${i}" tabindex="0" role="button" aria-pressed="${i===selStage}">
+    <div class="n">0${i+1}</div><div><h4>${L.t}<span>${L.s}</span></h4><p>${L.p}</p></div></div>`}).join('');
+  $$('#wfStages g').forEach(g=>{ const on=+g.dataset.stage===selStage; g.querySelectorAll('circle')[0].setAttribute('r', on?34:18); g.querySelectorAll('circle')[1].setAttribute('r', on?6:4); });
+  const y=[70,220,400,470][selStage]; const w=$('#wfWhale'); w.style.transition=reduce?'none':'transform 1.2s cubic-bezier(.3,.7,.2,1), opacity 1.2s'; w.style.transform=`translate(140px,${y}px)`; w.style.opacity=selStage===3?0.15:1-selStage*0.22;
+  $('#wfBloom').style.opacity=selStage>=2?1:0.15; $('#wfBloom').style.transition='opacity 1s';
+}
+function renderBeasts(){
+  const sil=`<svg viewBox="0 0 120 70"><path d="M 8 36 C 16 20, 44 12, 70 12 C 92 12, 104 20, 110 28 C 114 22, 118 16, 120 12 C 118 22, 114 28, 110 32 C 114 36, 118 44, 120 52 C 114 46, 106 40, 100 38 C 90 50, 60 58, 36 56 C 22 54, 12 46, 8 36 Z" fill="#243160" stroke="#5c6fb0"/><circle cx="26" cy="33" r="2.5" fill="#f2b84b"/></svg>`;
+  const unknown=`<svg viewBox="0 0 120 70"><path d="M 60 6 C 30 10, 14 30, 20 54 C 40 62, 80 62, 100 54 C 106 30, 90 10, 60 6 Z" fill="#1a1f3d"/></svg>`;
+  $('#beastGrid').innerHTML=D.beasts.map((b,i)=>{const L=b[lang];const rev=b.k==='conbang';return `<div class="beast ${rev?'revealed':'locked'}"><div class="sil">${rev?sil:unknown}</div><div class="nm">${L.n}<small>${rev?'01':'0'+(i+1)} · ${L.s}</small></div></div>`}).join('');
+}
+function renderSeals(){
+  const cx=260,cy=260,r=200,n=D.seals.length;
+  $('#sealRing').innerHTML=D.seals.map((s,i)=>{const a=-Math.PI/2+i*2*Math.PI/n;const x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);
+    return `<g class="seal" data-seal="${i}" tabindex="0" role="button" aria-pressed="${i===selSeal}" transform="translate(${x.toFixed(1)},${y.toFixed(1)})"><polygon points="0,-16 10,0 0,16 -10,0"/><text y="34">${s.id.toUpperCase()}</text></g>`}).join('');
+  const s=D.seals[selSeal],L=s[lang];
+  $('#sealInfo').innerHTML=`<div class="k">${t('seal_tag')} · ${lang==='vi'?'Ấn':'Seal'} ${selSeal+1}/${D.seals.length}</div><h3>${L.t}</h3><p>${L.p}</p><p><em>${L.r}</em></p><div class="stab"><span>${t('seal_stab')}</span><div class="bar"><i style="--v:${s.stab}%"></i></div><b>${s.stab}%</b></div>`;
+}
+function renderRooms(){
+  $('#rooms').innerHTML=D.rooms.map((r,i)=>{const L=r[lang];return `<button type="button" class="room" data-room="${i}" aria-pressed="${i===selRoom}"><span class="rn">0${i+1} · ${L.n} <span class="tag ${r.tag}">${t(r.tag==='canon'?'tag_canon':'tag_ext')}</span></span><p class="rd">${L.d}</p></button>`}).join('');
+  $$('#hotspots .hot').forEach(h=>h.setAttribute('aria-pressed', String(+h.dataset.room===selRoom)));
+}
+function renderBible(){
+  $('#canonList').innerHTML=D.canon[lang].map(x=>`<li>${x}</li>`).join('');
+  $('#openList').innerHTML=D.open[lang].map(x=>`<li>${x}</li>`).join('');
+}
+function syncMore(){ $('#moreBtn').textContent=t($('#storyCard').classList.contains('open')?'read_less':'read_more'); }
+
+// delegated interactions
+document.addEventListener('click',e=>{
+  const lb=e.target.closest('.lang button'); if(lb){ lang=lb.dataset.lang; try{localStorage.setItem('cb-lang',lang)}catch(x){} renderAll(); return; }
+  const st=e.target.closest('.stage'); if(st){ selStage=+st.dataset.stage; renderStages(); return; }
+  const sl=e.target.closest('.seal'); if(sl){ selSeal=+sl.dataset.seal; renderSeals(); return; }
+  const rm=e.target.closest('[data-room]'); if(rm){ selRoom=+rm.dataset.room; renderRooms(); return; }
+  if(e.target.closest('#moreBtn')){ $('#storyCard').classList.toggle('open'); syncMore(); }
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ const el=e.target.closest('.stage,.seal,.hot'); if(el){ e.preventDefault(); el.click(); } } });
+
+// reveal on scroll (content is visible at rest; .pending only added for elements below the fold)
+let io;
+function observeReveals(){
+  if(!('IntersectionObserver' in window)||reduce){ $$('.reveal').forEach(el=>el.classList.remove('pending')); return; }
+  io=io||new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.remove('pending'); const f=en.target.querySelector('.fall .scene'); if(f) f.classList.add('live'); io.unobserve(en.target);} }),{rootMargin:'0px 0px -8% 0px',threshold:.12});
+  $$('.reveal').forEach(el=>{ const r=el.getBoundingClientRect(); if(r.top>innerHeight) el.classList.add('pending'); io.observe(el); });
+}
+
+// hero: orbiting seals in SVG space
+(function orbit(){
+  const back=$('#orbitBack'), front=$('#orbitFront'); const n=7, els=[];
+  for(let i=0;i<n;i++){ const g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.innerHTML=`<polygon class="crystal" points="0,-14 9,0 0,14 -9,0"/>`; back.appendChild(g); els.push(g); }
+  const cx=740, cy=300, a=560, b=95; let t0=performance.now();
+  function frame(now){
+    const T=reduce?0:(now-t0)/1000;
+    els.forEach((g,i)=>{ const ang=T*0.18+i*2*Math.PI/n; const x=cx+a*Math.cos(ang), y=cy+b*Math.sin(ang)+Math.sin(T*0.9+i)*6; const depth=(Math.sin(ang)+1)/2; const sc=0.65+depth*0.7;
+      g.setAttribute('transform',`translate(${x.toFixed(1)},${y.toFixed(1)}) scale(${sc.toFixed(2)})`); g.style.opacity=(0.55+depth*0.45).toFixed(2);
+      const wantFront=Math.sin(ang)>0; if(wantFront&&g.parentNode!==front) front.appendChild(g); else if(!wantFront&&g.parentNode!==back) back.appendChild(g); });
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+// starfield + drifting life spores
+(function stars(){
+  const c=$('#stars'), ctx=c.getContext('2d'); let w,h,stars=[],spores=[];
+  function size(){ w=c.width=innerWidth*devicePixelRatio; h=c.height=innerHeight*devicePixelRatio; stars=Array.from({length:Math.min(260,Math.floor(w*h/9000))},()=>({x:Math.random()*w,y:Math.random()*h,r:(Math.random()*1.3+.3)*devicePixelRatio,p:Math.random()*6.28,s:Math.random()*.6+.2})); spores=Array.from({length:40},()=>({x:Math.random()*w,y:Math.random()*h,r:(Math.random()*1.8+.6)*devicePixelRatio,vx:(Math.random()-.5)*.15*devicePixelRatio,vy:-(Math.random()*.25+.05)*devicePixelRatio,a:Math.random()})); }
+  addEventListener('resize',size); size();
+  function draw(now){ ctx.clearRect(0,0,w,h); const T=now/1000;
+    for(const s of stars){ const tw=reduce?1:(.6+.4*Math.sin(T*s.s+s.p)); ctx.globalAlpha=tw*.9; ctx.fillStyle='#ece5d3'; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,6.28); ctx.fill(); }
+    for(const p of spores){ if(!reduce){ p.x+=p.vx; p.y+=p.vy; if(p.y<-10){p.y=h+10;p.x=Math.random()*w;} } ctx.globalAlpha=.35+.35*Math.sin(T+p.a*6); ctx.fillStyle='#5fd39a'; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.28); ctx.fill(); }
+    ctx.globalAlpha=1; if(!reduce) requestAnimationFrame(draw); }
+  requestAnimationFrame(draw);
+})();
+
+// ambient audio: whale song, wind, chimes (Web Audio synth, starts on click)
+let AC=null, master=null, playing=false, timers=[];
+function syncAudioLabel(){ const b=$('#audioBtn'); b.setAttribute('aria-pressed',String(playing)); b.querySelector('[data-i]').textContent=t(playing?'audio_on':'audio_off'); }
+function startAudio(){
+  AC=AC||new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume();
+  master=AC.createGain(); master.gain.value=0; master.connect(AC.destination); master.gain.linearRampToValueAtTime(.8,AC.currentTime+2.5);
+  // reverb-ish feedback delay
+  const delay=AC.createDelay(2); delay.delayTime.value=.42; const fb=AC.createGain(); fb.gain.value=.38; const wet=AC.createGain(); wet.gain.value=.5; delay.connect(fb).connect(delay); delay.connect(wet).connect(master);
+  // wind: filtered noise
+  const buf=AC.createBuffer(1,AC.sampleRate*4,AC.sampleRate); const d=buf.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+  const noise=AC.createBufferSource(); noise.buffer=buf; noise.loop=true; const bp=AC.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=420; bp.Q.value=.7; const wg=AC.createGain(); wg.gain.value=.045;
+  const lfo=AC.createOscillator(); lfo.frequency.value=.07; const lg=AC.createGain(); lg.gain.value=260; lfo.connect(lg).connect(bp.frequency); lfo.start();
+  noise.connect(bp).connect(wg).connect(master); noise.start();
+  // whale call: slow pitch glide with vibrato
+  function call(){ if(!playing) return; const o=AC.createOscillator(), g=AC.createGain(), f=AC.createBiquadFilter(); f.type='lowpass'; f.frequency.value=600; o.type='sine';
+    const t0=AC.currentTime, base=70+Math.random()*50, dur=5+Math.random()*4; o.frequency.setValueAtTime(base,t0); o.frequency.exponentialRampToValueAtTime(base*1.9,t0+dur*.55); o.frequency.exponentialRampToValueAtTime(base*1.1,t0+dur);
+    const v=AC.createOscillator(), vg=AC.createGain(); v.frequency.value=4.5; vg.gain.value=3; v.connect(vg).connect(o.frequency); v.start(t0); v.stop(t0+dur+.1);
+    g.gain.setValueAtTime(0,t0); g.gain.linearRampToValueAtTime(.22,t0+dur*.3); g.gain.linearRampToValueAtTime(0,t0+dur); o.connect(f).connect(g); g.connect(master); g.connect(delay); o.start(t0); o.stop(t0+dur+.1);
+    timers.push(setTimeout(call,(dur+6+Math.random()*10)*1000)); }
+  // crystal chimes: pentatonic bell tones
+  const notes=[523.25,587.33,659.25,783.99,880,1046.5];
+  function chime(){ if(!playing) return; const t0=AC.currentTime, fq=notes[Math.floor(Math.random()*notes.length)]; [1,2.76,5.4].forEach((m,i)=>{ const o=AC.createOscillator(), g=AC.createGain(); o.type='sine'; o.frequency.value=fq*m; g.gain.setValueAtTime(0,t0); g.gain.linearRampToValueAtTime([.07,.025,.01][i],t0+.01); g.gain.exponentialRampToValueAtTime(.0005,t0+3.5-i*.6); o.connect(g); g.connect(master); g.connect(delay); o.start(t0); o.stop(t0+4); });
+    timers.push(setTimeout(chime,(3+Math.random()*7)*1000)); }
+  playing=true; timers.push(setTimeout(call,1200)); timers.push(setTimeout(chime,3000));
+}
+function stopAudio(){ playing=false; timers.forEach(clearTimeout); timers=[]; if(master){ master.gain.cancelScheduledValues(AC.currentTime); master.gain.setTargetAtTime(0,AC.currentTime,.4); const m=master; setTimeout(()=>{try{m.disconnect()}catch(e){}},2500); } }
+$('#audioBtn').addEventListener('click',()=>{ try{ playing?stopAudio():startAudio(); }catch(e){ playing=false; } syncAudioLabel(); });
+
+renderAll();
+})();
+</script>
