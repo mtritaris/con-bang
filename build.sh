@@ -1,9 +1,9 @@
 #!/bin/sh
 # Wraps index.html (authored for the Claude artifact wrapper) into a complete standalone
-# document at dist/index.html, suitable for hosting or opening directly in Safari.
+# document at docs/index.html, suitable for hosting or opening directly in Safari.
 set -e
 cd "$(dirname "$0")"
-mkdir -p dist
+mkdir -p docs
 {
 cat <<'HEAD'
 <!doctype html>
@@ -22,5 +22,5 @@ cat <<'HEAD'
 HEAD
 cat index.html
 printf '\n</body>\n</html>\n'
-} > dist/index.html
-echo "built dist/index.html ($(wc -c < dist/index.html) bytes)"
+} > docs/index.html
+echo "built docs/index.html ($(wc -c < docs/index.html) bytes)"

@@ -14,9 +14,9 @@ Live artifact (private, Mark's account): https://claude.ai/artifact/HgYvpJBCB2VC
 - `index.html` — the whole page (CSS, markup, content data, behaviour). Authored for the Claude
   artifact wrapper, so it has no doctype/html/head/body tags of its own. ~89 KB, no build step, no
   dependencies beyond Google Fonts (Cormorant Garamond, Be Vietnam Pro, JetBrains Mono, Noto Serif JP).
-- `build.sh` — wraps `index.html` into a complete standalone document at `dist/index.html`
+- `build.sh` — wraps `index.html` into a complete standalone document at `docs/index.html`
   (adds doctype, viewport, iOS web-app metas). Run `./build.sh` after any edit before hosting.
-- `dist/index.html` — generated; do not edit by hand.
+- `docs/index.html` — generated; do not edit by hand. Served by GitHub Pages (legacy mode only allows `/` or `/docs`).
 - `STATUS.md` — this file.
 
 Not yet a git repo of its own (the parent `~` is a git repo). `git init` here if we want GitHub Pages.
@@ -47,9 +47,9 @@ edit `D.ui.en`.
 ## Delivering to the friend's iPhone (open question as of 2026-10-29)
 Options, in order of ease:
 1. Share the artifact from its Share menu, text the link; Safari → Share → Add to Home Screen.
-2. Host `dist/index.html` (GitHub Pages / Netlify / Cloudflare Pages), then Add to Home Screen.
+2. Host `docs/index.html` (GitHub Pages / Netlify / Cloudflare Pages), then Add to Home Screen.
    Standalone build already carries the iOS web-app metas.
-3. AirDrop `dist/index.html`; opening from Files uses Quick Look, which may not run the scripts.
+3. AirDrop `docs/index.html`; opening from Files uses Quick Look, which may not run the scripts.
 
 ## Next ideas (not started)
 - Apple touch icon (PNG, 180×180) and a web manifest for a proper home-screen install.
